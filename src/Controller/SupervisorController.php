@@ -3,17 +3,24 @@
 namespace App\Controller;
 
 use App\Service\Read\ReadSupervisorYaml;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class SupervisorController
+class SupervisorController extends AbstractController
 {
-    public function index(ReadSupervisorYaml $readSupervisorYaml)
+    /** @var ReadSupervisorYaml */
+    private $readSupervisorYaml;
+
+    public function __construct(ReadSupervisorYaml $readSupervisorYaml)
+    {
+        $this->readSupervisorYaml = $readSupervisorYaml;
+    }
+
+    public function index()
     {
         error_reporting(0);
 
-        $number = random_int(0, 100);
-
-        $consumers = $readSupervisorYaml->readConsumers();
+        $consumers = $this->readSupervisorYaml->readConsumers();
 
         var_dump($consumers);
         die('asdasdasd');

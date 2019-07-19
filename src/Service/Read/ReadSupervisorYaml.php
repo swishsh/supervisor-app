@@ -7,6 +7,8 @@ use Symfony\Component\Yaml\Yaml;
 
 class ReadSupervisorYaml
 {
+    const ID = 'read.read_supervisor_yaml';
+
     /**
      * @return Consumer[]
      */
