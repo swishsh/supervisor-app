@@ -1,0 +1,1771 @@
+deploy: eis-rbh
+supervisor:
+    dms.email.delivery:
+        template: ieis
+        command: 'rabbitmq:consumer:dms.email.delivery ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    eis.batch.emails:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.batch.emails -l 128 -w -m 50'
+        platforms:
+            ro: []
+
+    eis.cns.emails:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.cns.messages ##platform## -l 128 -w -m 20'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+
+    eis.collection.parser:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.collection.parser ##platform## -m 1'
+        platforms:
+            ro:
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    eos.customer.sync:
+        template: ieis
+        command: 'rabbitmq:consumer eos.customer.sync.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    rcl.customer.sync:
+        template: ieis
+        command: 'rabbitmq:consumer rcl.customer.sync.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+
+    eis.customer.sync.sap:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.customer.sync.sap ##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, startsecs: 3, stopwaitsecs: 30}
+
+    eis.customer.sync.sap.debug:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.customer.sync.sap.debug ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+
+    eis.customer.sync.solr:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.customer.sync.solr ##platform## -m 500 -w'
+        platforms:
+            ro:
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    dms.delivery.calendar_info:
+        template: ieis
+        command: 'rabbitmq:consumer:dms.delivery_calendar_info ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    dms.awb.courier_cash:
+        template: ieis
+        command: 'rabbitmq:consumer:dms.awb.courier_cash ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    dms.delivery_save.delivery_save_retry:
+        template: ieis
+        command: 'rabbitmq:consumer dms.delivery_save.delivery_save_retry.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+
+    dms.delivery_save.delivery_communication:
+        template: ieis
+        command: 'rabbitmq:consumer dms.delivery_save.delivery_communication.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+
+    dms.delivery.time:
+        template: ieis
+        command: 'rabbitmq:consumer:dms.delivery_time ##platform## -m 400 -w -l 64M'
+        platforms:
+            ro:
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    dms.delivery.offices.sync.eis:
+        template: ieis
+        command: 'rabbitmq:consumer dms.delivery.offices.sync.eis.##platform## -w -m 3000 -l 500'
+        platforms:
+            ro:
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    dms.status.update:
+        template: ieis
+        command: 'rabbitmq:consumer:dms.status.update ##platform## -e prod -m 200 -w -l 128M'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    eis.order.auto:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.order.auto ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+
+    eos.order.add:
+        template: ieis
+        command: 'rabbitmq:consumer eos.order.add.##platform## -m 50 -w'
+        dev:
+            ro: {numprocs: 10}
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+
+    rcl.order.add:
+        template: ieis
+        command: 'rabbitmq:consumer rcl.order.add.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+
+    eis.invoice.generate_pdf:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.invoice.generate_pdf ##platform## -m 50'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    eis.proforma.generate_pdf:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.proforma.generate_pdf ##platform## -m 50'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+
+    eis.iprice.offer_save.product_save_rpc:
+        template: ieis
+        command: 'rabbitmq:rpc_server:eis.iprice.offer_save.product_save_rpc ##platform##'
+        is_rpc: true
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+
+    eis.order.changed:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.order.changed ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    solr.order.changed:
+        template: ieis
+        command: 'rabbitmq:consumer solr.order.changed.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    eis.order.auto_invoice:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.order.auto_invoice ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30}
+
+    eis.order.add.emag_debug:
+        ignore: true
+        template: ieis
+        command: 'rabbitmq:consumer eis.order.add.emag_debug.##platform## -m 50 -w'
+        platforms:
+            ro: []
+
+    eis.order.add.fd_debug:
+        ignore: true
+        template: ieis
+        command: 'rabbitmq:consumer eis.order.add.fd_debug.##platform## -m 50 -w'
+        platforms:
+            ro: []
+
+    emag.eis.order.ohs_cancel.retry:
+        ignore: true
+        platforms:
+            ro: []
+
+    fd.eis.order.ohs_cancel.retry:
+        ignore: true
+        platforms:
+            ro: []
+
+    eis.order.auto_dfdl:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.order.auto_dfdl -w -m 50 ##platform##'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, stopwaitsecs: 30, startsecs: 3}
+
+    eis.order.history.get:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.order.history.get ##platform## -m 50 -w'
+        ignore: true
+        platforms:
+            ro: []
+
+    eos.order.update:
+        template: ieis
+        command: 'rabbitmq:consumer eos.order.update.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    rcl.order.update:
+        template: ieis
+        command: 'rabbitmq:consumer rcl.order.update.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    eis.inventory.create:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.inventory.create ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    eis.inventory.create.stock:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.inventory.create.stock ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    eis.pricing.product_price_check_sync:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.pricing.product_price_check_sync ##platform## -m 50'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    eis.fd.product_price_check_sync:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.fd.product_price_check_sync ##platform## -m 50'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+
+    eis.product.update.price_check_update:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.product_price_check_update ##platform## -m 500 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    eis.product_price_check_sync:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.product_price_check_sync ##platform## -m 50'
+        platforms:
+            ro:
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+
+    eis.products.extendwarranty.get:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.products.extendwarranty.get ##platform## -m 50'
+        platforms:
+            ro:
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+
+    eis.customer.reversal.warehouse:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.invoice.generateReversalInvoiceFromAwb ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    eis.user.orders.get:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.user.orders.get ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+
+    eis.vendor.save:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.vendor.save ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+
+    eis.warranty.save:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.warranty.save ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+
+    eis.email.history.sync:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.email.history.sync.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+
+    eis.sms.history.sync:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.sms.history.sync ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+
+    ens.sync:
+        template: ieis
+        command: 'rabbitmq:consumer:ens.sync -m 50 ##platform##'
+        platforms:
+            ro:
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+
+    iprice.pricing.offer_save.product_save_rpc:
+        template: ieis
+        command: 'rabbitmq:rpc_server:iprice.pricing.offer_save.product_save_rpc ##platform##'
+        is_rpc: true
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+
+    iprice.fd.offer_save.product_save_rpc:
+        template: ieis
+        command: 'rabbitmq:rpc_server:iprice.fd.offer_save.product_save_rpc ##platform##'
+        is_rpc: true
+        platforms:
+            ro:
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1}
+
+    isvc.extended_warranty.sync:
+        template: ieis
+        command: 'rabbitmq:consumer:isvc.extended_warranty.sync ##platform##'
+        platforms:
+            ro:
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+
+    scm.com.category.save:
+        command: 'rabbitmq:consumer scm.com.category.save.##platform## -m 50 -w'
+        template: ieis
+        platforms:
+            ro:
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+
+    scm.com.category.save.fd:
+        command: 'rabbitmq:consumer scm.com.category.save.fd.##platform## -m 50 -w'
+        template: ieis
+        platforms:
+            ro:
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+
+    scm.nom.brand.save:
+        template: ieis
+        command: 'rabbitmq:consumer scm.nom.brand.save.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+
+    com.product.save.emag:
+        template: ieis
+        command: 'rabbitmq:consumer com.product.save.emag.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    com.product.save.fd:
+        template: ieis
+        command: 'rabbitmq:consumer com.product.save.fd.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+
+    eis.supplier.save.emag:
+        template: ieis
+        command: 'rabbitmq:consumer eis.supplier.save.emag.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+
+    eis.supplier.save.fd:
+        template: ieis
+        command: 'rabbitmq:consumer eis.supplier.save.fd.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+
+    eis.order.create.fail:
+        ignore: true
+        platforms:
+            ro: []
+
+    rcl.order.create.fail:
+        ignore: true
+        platforms:
+            ro: []
+
+    eos.customer.sync.dummy:
+        ignore: true
+        platforms:
+            ro: []
+
+    rcl.customer.sync.dummy:
+        ignore: true
+        platforms:
+            ro: []
+
+    eos.order.payment_processor.check:
+        ignore: true
+        platforms:
+            ro: []
+
+    rcl.order.payment_processor.check:
+        ignore: true
+        platforms:
+            ro: []
+
+    eis.order.bulk.reversal:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.order.bulk.reversal ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+
+    eis.bum_sync.bum_division:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.bum_sync.bum_division ro -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+
+    eis.bum_sync.bum_line:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.bum_sync.bum_line ro -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+
+    eis.bum_sync.bum_manager:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.bum_sync.bum_manager ro -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+
+    eis.order.payment_processor:
+        template: ieis
+        command: 'rabbitmq:consumer eis.order.payment_processor.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 2}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 2}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 2}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 2}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 2}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 2}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 2}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 2}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 2}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    mktp.customer.sync:
+        template: ieis
+        command: 'rabbitmq:consumer:mktp.customer.sync ##platform## -m 50'
+        platforms:
+            ro:
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+
+    dms.return_record:
+        template: ieis
+        command: 'rabbitmq:consumer:dms.return.record ##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+
+    cms.sync_subscriptions:
+        ignore: true
+        template: ieis
+        command: 'rabbitmq:consumer:eis.customer.sync.subscriptions ##platform##'
+        platforms:
+            ro: []
+
+    eis.resealed.seal_links.sync:
+        template: ieis
+        command: 'rabbitmq:consumer eis.resealed.seal_links.sync.##platform## -w'
+        platforms:
+            ro:
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+
+    cms.eis.quantity.limit:
+        template: ieis
+        command: 'rabbitmq:consumer:cms.eis.quantity.limit ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+
+    eis.order.financial_documents_download:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.order.financial_documents ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1}
+
+    ohs.eis.order.on_demand_import:
+        template: ieis
+        command: 'rabbitmq:consumer:ohs.eis.on_demand_import ##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    eis.ohs.vendor_order.sync:
+        template: ieis
+        command: 'rabbitmq:consumer  eis.ohs.vendor_order.sync.ro  -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    emag.eis.order.ohs_import:
+        template: ieis
+        command: 'rabbitmq:consumer emag.eis.order.ohs_import.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 2, startsecs: 3, autostart: 1}
+
+    fd.eis.order.ohs_import:
+        template: ieis
+        command: 'rabbitmq:consumer fd.eis.order.ohs_import.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    emag.eis.order.ohs_cancel:
+        template: ieis
+        command: 'rabbitmq:consumer emag.eis.order.ohs_cancel.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    fd.eis.order.ohs_cancel:
+        template: ieis
+        command: 'rabbitmq:consumer fd.eis.order.ohs_cancel.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    fd_mig.eis.order.ohs_import:
+        template: ieis
+        command: 'rabbitmq:consumer fd_mig.eis.order.ohs_import.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 0}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 0}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 0}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 0}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 0}
+
+    eis.ohs.add_return_period:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.ohs.add_return_period ##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    eis.awb.save_ohs:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.awb.save_ohs ##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    eis.order.cancel.bulk:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.order.cancel.bulk ##platform##'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    eis.ohs.process_failed_requests:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.ohs.process_failed_requests ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+
+    eis.profitshare.order_status_update:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.profitshare.order_status_update ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    eis.twoPerformant.order_status_update:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.twoPerformant.order_status_update ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    eis.supplier.update_supply_decision.all:
+        template: ieis
+        command: 'rabbitmq:consumer eis.supplier.update_supply_decision.all.##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+
+    eis.supplier.update_supply_decision.emag:
+        template: ieis
+        command: 'rabbitmq:consumer eis.supplier.update_supply_decision.emag.##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    eis.supplier.update_supply_decision.fd:
+        template: ieis
+        command: 'rabbitmq:consumer eis.supplier.update_supply_decision.fd.##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+
+    eis.supplier.update_supply_confirmation.all:
+        template: ieis
+        command: 'rabbitmq:consumer eis.supplier.update_supply_confirmation.all.##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+
+    eis.supplier.update_supply_confirmation.emag:
+        template: ieis
+        command: 'rabbitmq:consumer eis.supplier.update_supply_confirmation.emag.##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+
+    eis.supplier.update_supply_confirmation.fd:
+        template: ieis
+        command: 'rabbitmq:consumer eis.supplier.update_supply_confirmation.fd.##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    eis.supply_reception:
+        template: ieis
+        command: 'rabbitmq:consumer eis.supply_reception.##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+
+    eis.voucher.add_voucher:
+        template: ieis
+        command: 'rabbitmq:consumer eis.voucher.add_voucher.##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+
+    eis.order.add_old:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.order.add_old ##platform## -m 50 -w'
+        ignore: true
+        platforms:
+            ro: []
+
+    eis.delivery.consumer.delivery_planning:
+        template: ieis
+        command: 'rabbitmq:consumer eis.delivery.consumer.delivery_planning.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+
+    eis.delivery.dpl_order_update:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.delivery.dpl_order_update ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    eis.eis.solr.invoices.sync:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.eis.solr.invoices.sync ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+
+    eis.srn.save_reservation_retry:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.srn.save_reservation_retry ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+    eis.eos.save_prepay_transaction_id:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.eos.save_prepay_transaction_id ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    eis.prepay.recharge.notifications:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.prepay.recharge.notifications ##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    eis.order_add.save_reservations:
+        template: ieis
+        command: 'rabbitmq:consumer eis.order_add.save_reservations.##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, autostart: 1}
+
+    eis.order.auto_invoice.post_processing:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.order.auto_invoice.post_processing ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    trn.eis.send_order_to_dpl:
+        template: ieis
+        command: 'rabbitmq:consumer trn.eis.send_order_to_dpl.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}
+
+    eis.solr.orders_sync_eis:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.solr.orders_sync_eis ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1}
+
+    eis.solr.orders_sync_fd:
+        template: ieis
+        command: 'rabbitmq:consumer:eis.solr.orders_sync_fd ##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+
+
+    eis.supply_customer_order:
+        template: ieis
+        command: 'rabbitmq:consumer eis.supply_customer_order.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+
+    eis.debug_command:
+        template: ieis
+        command: 'rabbitmq:consumer eis.debug_command.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker23-rbh-prod.emag.network, numprocs: 2, autostart: 0}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 2, autostart: 0}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 2, autostart: 0}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 2, autostart: 0}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 2, autostart: 0}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 2, autostart: 0}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 2, autostart: 0}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 2, autostart: 0}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 2, autostart: 0}
+
+    loy.transaction.notify:
+        template: ieis
+        command: 'rabbitmq:consumer loy.transaction.notify.##platform## -m 10 -w'
+        platforms:
+            ro:
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+
+    trn.eis.update_showroom_delivery_tracking_to_ohs:
+        template: ieis
+        command: 'rabbitmq:consumer trn.eis.update_showroom_delivery_tracking_to_ohs.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker1-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker2-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker3-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker24-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker25-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker26-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+
+    trn.order.transfer_received:
+        template: ieis
+        command: 'rabbitmq:consumer trn.order.transfer_received.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker4-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker5-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker6-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker7-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker8-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker9-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker10-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1}
+
+    eis.customer.delete.solr:
+        template: ieis
+        command: 'rabbitmq:consumer eis.customer.delete.solr.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+
+    eis.dpl.allocate_to_retail:
+        template: ieis
+        command: 'rabbitmq:consumer eis.dpl.allocate_to_retail.##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: eis-worker11-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1}
+
+    eis.post.reversal.operations:
+        template: ieis
+        command: 'rabbitmq:consumer eis.post.reversal.operations.##platform##'
+        platforms:
+            ro:
+                - {server: eis-worker12-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker13-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker14-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker15-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker16-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+    eis.move.delivery:
+        template: ieis
+        command: 'rabbitmq:consumer eis.move.delivery.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: eis-worker17-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker18-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker19-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker20-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker21-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker22-rbh-prod.emag.network, numprocs: 1}

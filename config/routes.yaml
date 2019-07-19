@@ -1,3 +1,3 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+supervisor_display:
+  path: /supervisor/read
+  controller: App\Controller\SupervisorController::index
