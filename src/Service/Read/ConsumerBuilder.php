@@ -14,13 +14,6 @@ class ConsumerBuilder
      */
     public static function build(string $consumerName, array $consumerData) : Consumer
     {
-//        if (null === $consumerData['template']) {
-//            echo ($consumerName . '\n');
-//            var_dump($consumerData);
-//            die();
-//        }
-
-
         $consumer = new Consumer();
 
         $consumer->setTemplate($consumerData['template'])

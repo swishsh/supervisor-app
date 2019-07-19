@@ -2,7 +2,7 @@
 
 namespace App\Service\Read;
 
-use App\Dto\Consumer;
+use App\Dto\ConsumerCollection;
 use Symfony\Component\Yaml\Yaml;
 
 class ReadSupervisorYaml
@@ -10,17 +10,17 @@ class ReadSupervisorYaml
     const ID = 'read.read_supervisor_yaml';
 
     /**
-     * @return Consumer[]
+     * @return ConsumerCollection
      */
-    public function readConsumers() : array
+    public function readConsumers() : ConsumerCollection
     {
         $supervisorConfig = $this->readYaml();
-        $consumerCollection = array();
+        $consumerCollection = new ConsumerCollection();
 
         foreach ($supervisorConfig['supervisor'] as $consumerName => $consumerLine) {
             $consumer = ConsumerBuilder::build($consumerName, $consumerLine);
 
-            $consumerCollection[] = $consumer;
+            $consumerCollection->addConsumer($consumer);
         }
 
         return $consumerCollection;

@@ -52,7 +52,7 @@ class Consumer
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -61,7 +61,7 @@ class Consumer
      * @param string $name
      * @return Consumer
      */
-    public function setName(string $name): Consumer
+    public function setName(string $name)
     {
         $this->name = $name;
         return $this;
@@ -70,7 +70,7 @@ class Consumer
     /**
      * @return string
      */
-    public function getTemplate(): string
+    public function getTemplate()
     {
         return $this->template;
     }
@@ -79,7 +79,7 @@ class Consumer
      * @param string $template
      * @return Consumer
      */
-    public function setTemplate(string $template = null): Consumer
+    public function setTemplate(string $template = null)
     {
         $this->template = $template;
         return $this;
@@ -88,7 +88,7 @@ class Consumer
     /**
      * @return string
      */
-    public function getCommand(): string
+    public function getCommand()
     {
         return $this->command;
     }
@@ -97,7 +97,7 @@ class Consumer
      * @param string $command
      * @return Consumer
      */
-    public function setCommand(string $command = null): Consumer
+    public function setCommand(string $command = null)
     {
         $this->command = $command;
         return $this;
@@ -106,7 +106,7 @@ class Consumer
     /**
      * @return string
      */
-    public function getPlatform(): string
+    public function getPlatform()
     {
         return $this->platform;
     }
@@ -115,7 +115,7 @@ class Consumer
      * @param string $platform
      * @return Consumer
      */
-    public function setPlatform(string $platform): Consumer
+    public function setPlatform(string $platform)
     {
         $this->platform = $platform;
         return $this;
@@ -124,7 +124,7 @@ class Consumer
     /**
      * @return int
      */
-    public function getNumprocs(): int
+    public function getNumprocs()
     {
         return $this->numprocs;
     }
@@ -133,7 +133,7 @@ class Consumer
      * @param int $numprocs
      * @return Consumer
      */
-    public function setNumprocs(int $numprocs): Consumer
+    public function setNumprocs(int $numprocs)
     {
         $this->numprocs = $this->numprocs + $numprocs;
         return $this;
@@ -142,7 +142,7 @@ class Consumer
     /**
      * @return int
      */
-    public function getAutostart(): int
+    public function getAutostart()
     {
         return $this->autostart;
     }
@@ -151,7 +151,7 @@ class Consumer
      * @param int $autostart
      * @return Consumer
      */
-    public function setAutostart(int $autostart): Consumer
+    public function setAutostart(int $autostart)
     {
         $this->autostart = $this->autostart + $autostart;
         return $this;
@@ -160,7 +160,7 @@ class Consumer
     /**
      * @return int
      */
-    public function getStartsecs(): int
+    public function getStartsecs()
     {
         return $this->startsecs;
     }
@@ -169,7 +169,7 @@ class Consumer
      * @param int $startsecs
      * @return Consumer
      */
-    public function setStartsecs(int $startsecs = null): Consumer
+    public function setStartsecs(int $startsecs = null)
     {
         $this->startsecs = $startsecs;
         return $this;
@@ -178,7 +178,7 @@ class Consumer
     /**
      * @return int
      */
-    public function getStopwaitsecs(): int
+    public function getStopwaitsecs()
     {
         return $this->stopwaitsecs;
     }
@@ -187,7 +187,7 @@ class Consumer
      * @param int $stopwaitsecs
      * @return Consumer
      */
-    public function setStopwaitsecs(int $stopwaitsecs = null): Consumer
+    public function setStopwaitsecs(int $stopwaitsecs = null)
     {
         $this->stopwaitsecs = $stopwaitsecs;
         return $this;
@@ -196,7 +196,7 @@ class Consumer
     /**
      * @return bool
      */
-    public function isIgnore(): bool
+    public function isIgnore()
     {
         return $this->ignore;
     }
@@ -205,7 +205,7 @@ class Consumer
      * @param bool $ignore
      * @return Consumer
      */
-    public function setIgnore(bool $ignore): Consumer
+    public function setIgnore(bool $ignore)
     {
         $this->ignore = $ignore;
         return $this;
