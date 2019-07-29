@@ -27,12 +27,12 @@ class Consumer
     /**
      * @var int
      */
-    private $numprocs;
+    private $numprocs = 0;
 
     /**
      * @var int
      */
-    private $autostart;
+    private $autostart = 0;
 
     /**
      * @var int

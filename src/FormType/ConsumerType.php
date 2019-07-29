@@ -18,8 +18,9 @@ class ConsumerType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', TextType::class, ['label' => false, 'disabled' => true])
-            ->add('numprocs', IntegerType::class, ['label' => 'Total proc:', 'attr' => ['class' => 'number-class']])
+        $builder
+            ->add('name', TextType::class, ['label' => false, 'disabled' => true])
+            ->add('numprocs', IntegerType::class, ['label' => false, 'attr' => ['class' => 'number-class']])
             ->add('autostart', IntegerType::class, ['label' => 'AutoStart proc:', 'attr' => ['class' => 'number-class']])
             ->add('template', HiddenType::class)
             ->add('command', HiddenType::class)

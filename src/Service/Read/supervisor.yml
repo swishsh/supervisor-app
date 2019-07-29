@@ -23,8 +23,8 @@ supervisor:
                 - {server: eis-worker27-rbh-prod.emag.network, numprocs: 1}
                 - {server: eis-worker28-rbh-prod.emag.network, numprocs: 1}
                 - {server: eis-worker29-rbh-prod.emag.network, numprocs: 1}
-                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1}
-                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1}
+                - {server: eis-worker30-rbh-prod.emag.network, numprocs: 1, autostart: 0}
+                - {server: eis-worker31-rbh-prod.emag.network, numprocs: 1, autostart: 0}
 
     eis.batch.emails:
         template: ieis

@@ -43,10 +43,10 @@ class ConsumerBuilder
 
             $sign = 1;
             if (0 === $consumerThread['autostart']) {
-                $sign = -1;
+                $sign = 0;
             }
 
-            $consumer->setAutostart($sign * $consumerThread['autostart']);
+            $consumer->setAutostart($sign * $consumerThread['numprocs']);
         }
     }
 }

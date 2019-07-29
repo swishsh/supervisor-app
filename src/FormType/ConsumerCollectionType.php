@@ -16,7 +16,7 @@ class ConsumerCollectionType extends AbstractType
         $builder->add(
             'consumers', CollectionType::class, [
                 'entry_type' => ConsumerType::class,
-                'entry_options' => ['label' => false, 'attr' => ['class' => 'row']],
+                'entry_options' => ['label' => false],
                 ]
             )
             ->add('save', SubmitType::class, ['label' => 'Save supervisor config']);
