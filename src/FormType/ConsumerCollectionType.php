@@ -2,7 +2,7 @@
 
 namespace App\FormType;
 
-use App\Dto\ConsumerCollection;
+use App\Dto\Input\ConsumerCollection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -13,19 +13,20 @@ class ConsumerCollectionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add(
+        $builder
+            ->add(
             'consumers', CollectionType::class, [
-                'entry_type' => ConsumerType::class,
-                'entry_options' => ['label' => false],
+                    'entry_type' => ConsumerType::class,
+                    'entry_options' => ['label' => false]
                 ]
             )
-            ->add('save', SubmitType::class, ['label' => 'Save supervisor config']);
+            ->add('save', SubmitType::class, ['label' => 'Save config', 'attr' => ['class' => 'btn table-footer-fixed']]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ConsumerCollection::class,
+            'data_class' => ConsumerCollection::class
         ]);
     }
 }

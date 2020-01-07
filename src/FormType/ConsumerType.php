@@ -2,11 +2,10 @@
 
 namespace App\FormType;
 
-use App\Dto\Consumer;
+use App\Dto\Input\Consumer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,9 +18,9 @@ class ConsumerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['label' => false, 'disabled' => true])
+            ->add('name', HiddenType::class)
             ->add('numprocs', IntegerType::class, ['label' => false, 'attr' => ['class' => 'number-class']])
-            ->add('autostart', IntegerType::class, ['label' => 'AutoStart proc:', 'attr' => ['class' => 'number-class']])
+            ->add('autostart', IntegerType::class, ['label' => false, 'attr' => ['class' => 'number-class']])
             ->add('template', HiddenType::class)
             ->add('command', HiddenType::class)
             ->add('platform', HiddenType::class)

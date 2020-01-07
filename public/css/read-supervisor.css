@@ -1,20 +1,19 @@
-* {
-    box-sizing: border-box;
-}
-
-.column {
-    float: left;
-    width: 50%;
-    padding: 10px;
-    height: 300px;
-}
-
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
 .number-class {
-    width: 50px
+    width: 40px;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+tr.table-header-fixed > th {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+}
+
+.table-footer-fixed {
+    margin: 1rem;
+    position: fixed;
+
+    bottom: 0;
+    /*background-color: #fff;*/
 }

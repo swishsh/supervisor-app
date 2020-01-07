@@ -2,45 +2,35 @@
 
 {% block stylesheets %}
     {{ parent() }}
-
-    <style>
-        .number-class {
-            width: 40px;
-        }
-    </style>
+    <link href="{{ asset('css/read-supervisor.css') }}" rel="stylesheet"/>
 {% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
-        <div class="row" style="font-size: 12px">
             {{ form_start(form) }}
-                {% for consumer in form.consumers %}
-{#                    {% if (loop.index is even) %}#}
-{#                    {% endif %}#}
-{#                            <div class="col-sm-1">#}
-
-{#                            </div>#}
-{#                            {{ form }}#}
-
-{#                    <div class="col-sm-6">#}
-                        {{ form_row(consumer.numprocs) }}
-{#                    </div>#}
-
-{#                    {{ consumer.name.vars.value }}#}
-                    {{ form_label(consumer.numprocs, 'numprocs') }}
-
-                    {#  {{ form_label(consumer.numprocs, consumer.name.vars.value) }}#}
-{##}
-{#                    <div class="col-sm-6">#}
-                         {{ form_row(consumer.autostart) }}
-{#                    </div>#}
-
-{#                    {% if (loop.index is even) %}#}
-{#                    {% endif %}#}
-                {% endfor %}
-
-                {{ form_row(form.save) }}
+                <table class="table">
+                    <tr class="table-header-fixed">
+                        {% for i in 0..2 %}
+                            <th>Consumer name</th>
+                            <th>Numprocs</th>
+                            <th>Autostart</th>
+                        {% endfor %}
+                    </tr>
+                    {% for consumers in form.consumers|batch(3) %}
+                        <tr>
+                            {% for consumer in consumers %}
+                                <td>
+                                    {{ consumer.name.vars.value }}
+                                </td>
+                                <td>
+                                    {{ form_row(consumer.numprocs) }}
+                                </td>
+                                <td>
+                                    {{ form_row(consumer.autostart) }}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+{#            {{ form_row(form.save) }}#}
             {{ form_end(form) }}
-        </div>
-    </div>
 {% endblock %}

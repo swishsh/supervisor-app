@@ -2,10 +2,11 @@
 
 namespace App\Service\Read;
 
-use App\Dto\ConsumerCollection;
+use App\Dto\Input\ConsumerCollection;
+use App\Service\ReadSupervisorInterface;
 use Symfony\Component\Yaml\Yaml;
 
-class ReadSupervisorYaml
+class ReadSupervisorYaml implements ReadSupervisorInterface
 {
     const ID = 'read.read_supervisor_yaml';
 
@@ -31,8 +32,12 @@ class ReadSupervisorYaml
      */
     private function readYaml() : array
     {
-        $supervisorConfig = Yaml::parseFile(__DIR__ . '/supervisor.yml');
+        $filePath = __DIR__ . '/../Files/supervisor.yml';
 
-        return $supervisorConfig;
+        if (file_exists(__DIR__ . '/../Files/outputsupervisor.yml')) {
+            $filePath = __DIR__ . '/../Files/outputsupervisor.yml';
+        }
+
+        return Yaml::parseFile($filePath);
     }
 }

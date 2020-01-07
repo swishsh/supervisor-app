@@ -2,7 +2,8 @@
 
 namespace App\Service\Read;
 
-use App\Dto\Consumer;
+
+use App\Dto\Input\Consumer;
 
 class ConsumerBuilder
 {
@@ -16,9 +17,9 @@ class ConsumerBuilder
     {
         $consumer = new Consumer();
 
-        $consumer->setTemplate($consumerData['template'])
-            ->setCommand($consumerData['command'])
-            ->setIgnore((bool)$consumerName['ignore'])
+        $consumer->setTemplate(isset($consumerData['template']) ? $consumerData['template'] : "")
+            ->setCommand(isset($consumerData['command']) ? $consumerData['command'] : "")
+            ->setIgnore(isset($consumerName['ignore']) ? (bool)$consumerName['ignore'] : false)
             ->setName($consumerName);
 
         foreach($consumerData['platforms'] as $platform => $consumerThreads) {
@@ -37,11 +38,14 @@ class ConsumerBuilder
     private static function updateConsumerLineProperties(array $consumerThreads, Consumer $consumer)
     {
         foreach ($consumerThreads as $consumerThread) {
-            $consumer->setNumprocs($consumerThread['numprocs'])
-                ->setStartsecs($consumerThread['startsecs'])
-                ->setStopwaitsecs($consumerThread['stopwaitsecs']);
+            $consumer->setNumprocs(isset($consumerThread['numprocs']) ? $consumerThread['numprocs'] : 0)
+                ->setStartsecs(isset($consumerThread['startsecs']) ? $consumerThread['startsecs'] : -1)
+                ->setStopwaitsecs(isset($consumerThread['stopwaitsecs']) ? $consumerThread['stopwaitsecs'] : -1);
 
             $sign = 1;
+            if (!isset($consumerThread['autostart'])) {
+                $consumerThread['autostart'] = 1;
+            }
             if (0 === $consumerThread['autostart']) {
                 $sign = 0;
             }

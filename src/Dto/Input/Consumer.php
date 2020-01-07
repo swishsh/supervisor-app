@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Dto;
+namespace App\Dto\Input;
 
 class Consumer
 {
@@ -42,7 +42,7 @@ class Consumer
     /**
      * @var bool
      */
-    private $ignore;
+    private $ignore = false;
 
     /**
      * @var int
@@ -61,7 +61,7 @@ class Consumer
      * @param string $name
      * @return Consumer
      */
-    public function setName(string $name)
+    public function setName(string $name = null)
     {
         $this->name = $name;
         return $this;
@@ -115,7 +115,7 @@ class Consumer
      * @param string $platform
      * @return Consumer
      */
-    public function setPlatform(string $platform)
+    public function setPlatform(string $platform = null)
     {
         $this->platform = $platform;
         return $this;
@@ -205,7 +205,7 @@ class Consumer
      * @param bool $ignore
      * @return Consumer
      */
-    public function setIgnore(bool $ignore)
+    public function setIgnore($ignore)
     {
         $this->ignore = $ignore;
         return $this;
