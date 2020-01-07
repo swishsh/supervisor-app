@@ -11,7 +11,7 @@ class OutputConsumerCollection
      * @param OutputConsumer $consumerOutput
      * @return OutputConsumerCollection
      */
-    public function addConsumerOutput(OutputConsumer $consumerOutput): OutputConsumerCollection
+    public function addOutputConsumer(OutputConsumer $consumerOutput): OutputConsumerCollection
     {
         $this->consumerOutputs[] = $consumerOutput;
         return $this;

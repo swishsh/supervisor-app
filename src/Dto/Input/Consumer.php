@@ -135,6 +135,16 @@ class Consumer
      */
     public function setNumprocs(int $numprocs)
     {
+        $this->numprocs = $numprocs;
+        return $this;
+    }
+
+    /**
+     * @param int $numprocs
+     * @return Consumer
+     */
+    public function increaseNumprocs(int $numprocs)
+    {
         $this->numprocs = $this->numprocs + $numprocs;
         return $this;
     }

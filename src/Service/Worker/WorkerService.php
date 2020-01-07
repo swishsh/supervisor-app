@@ -8,26 +8,16 @@ use App\Dto\WorkerCollection;
 
 class WorkerService
 {
-    /** @var WorkerFactory */
-    private $workerFactory;
-
-    /**
-     * WorkerService constructor.
-     */
-    public function __construct()
-    {
-        $this->workerFactory = new WorkerFactory();
-    }
-
     /**
      * @return WorkerCollection
      */
-    public function initWorkers() : WorkerCollection
+    public static function initWorkers() : WorkerCollection
     {
+        $workerFactory = new WorkerFactory();
         $workerCollection = new WorkerCollection();
 
         for ($i = 1; $i <= ConfigurationPage::NUMBER_OF_WORKERS; $i++) {
-            $worker = $this->workerFactory->createWorker($i, ConfigurationPage::COUNTRY_CODE);
+            $worker = $workerFactory->createWorker($i, ConfigurationPage::COUNTRY_CODE);
             $workerCollection->addWorker($worker);
         }
 
@@ -39,7 +29,7 @@ class WorkerService
      *
      * @return Worker
      */
-    public function getLeastLoadWorker(WorkerCollection $workerCollection) : Worker
+    public static function getLeastLoadWorker(WorkerCollection $workerCollection) : Worker
     {
         /** @var Worker $leastLoadWorker */
         $leastLoadWorker = $workerCollection->getWorkers()[0];

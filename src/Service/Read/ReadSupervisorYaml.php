@@ -3,10 +3,9 @@
 namespace App\Service\Read;
 
 use App\Dto\Input\ConsumerCollection;
-use App\Service\ReadSupervisorInterface;
 use Symfony\Component\Yaml\Yaml;
 
-class ReadSupervisorYaml implements ReadSupervisorInterface
+class ReadSupervisorYaml
 {
     const ID = 'read.read_supervisor_yaml';
 

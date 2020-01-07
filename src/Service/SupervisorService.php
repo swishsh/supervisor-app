@@ -10,27 +10,27 @@ use App\Service\Write\WriteSupervisorYaml;
 
 class SupervisorService
 {
-    public function doTheMagic(ConsumerCollection $consumerCollection)
+    /**
+     * @param ConsumerCollection $consumerCollection
+     */
+    public function recomputeSupervisor(ConsumerCollection $consumerCollection)
     {
-        $workerService = new WorkerService();
-        $writeSupervisorYaml = new WriteSupervisorYaml();
-
-        $workerCollection = $workerService->initWorkers();
+        $workerCollection = WorkerService::initWorkers();
         $consumerOutputCollection = new OutputConsumerCollection();
 
         foreach ($consumerCollection->getConsumers() as $consumer) {
             $outputConsumer = new OutputConsumer($consumer);
 
             for ($i = 1; $i <= $consumer->getNumprocs(); $i++) {
-                $worker = $workerService->getLeastLoadWorker($workerCollection);
+                $worker = WorkerService::getLeastLoadWorker($workerCollection);
                 $worker->incrementCurrentLoad();
 
                 $outputConsumer->addProcess($worker, $consumer);
             }
 
-            $consumerOutputCollection->addConsumerOutput($outputConsumer);
+            $consumerOutputCollection->addOutputConsumer($outputConsumer);
         }
 
-        $writeSupervisorYaml->writeConsumers($consumerOutputCollection);
+        WriteSupervisorYaml::writeConsumers($consumerOutputCollection);
     }
 }

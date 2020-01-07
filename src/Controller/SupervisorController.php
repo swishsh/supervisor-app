@@ -33,7 +33,7 @@ class SupervisorController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $consumerCollection = $form->getData();
 
-            $this->supervisorService->doTheMagic($consumerCollection);
+            $this->supervisorService->recomputeSupervisor($consumerCollection);
         }
 
         return $this->render('read_supervisor.html.twig', [

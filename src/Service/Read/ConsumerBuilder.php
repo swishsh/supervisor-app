@@ -38,7 +38,7 @@ class ConsumerBuilder
     private static function updateConsumerLineProperties(array $consumerThreads, Consumer $consumer)
     {
         foreach ($consumerThreads as $consumerThread) {
-            $consumer->setNumprocs(isset($consumerThread['numprocs']) ? $consumerThread['numprocs'] : 0)
+            $consumer->increaseNumprocs($consumerThread['numprocs'])
                 ->setStartsecs(isset($consumerThread['startsecs']) ? $consumerThread['startsecs'] : -1)
                 ->setStopwaitsecs(isset($consumerThread['stopwaitsecs']) ? $consumerThread['stopwaitsecs'] : -1);
 
