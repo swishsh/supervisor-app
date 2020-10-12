@@ -184,13 +184,16 @@ class OutputConsumer
             $processCollection[] = $process->toArray();
         }
 
-        return [
-            'ignore' => $this->isIgnore(),
-            'template' => $this->getTemplate(),
-            'command' => $this->getCommand(),
-            'platforms' => [
-                $this->getPlatform() => $processCollection
-            ]
-        ];
+
+        $response = [];
+        if (null !== $this->isIgnore()) {
+            $response['ignore'] = $this->isIgnore();
+        }
+
+        $response['template'] = $this->getTemplate();
+        $response['command'] = $this->getCommand();
+        $response['platforms'] = [$this->getPlatform() => $processCollection];
+
+        return $response;
     }
 }

@@ -29,7 +29,7 @@ class OutputConsumerCollection
         }
 
         $return = [
-            'deploy' => 'ieis',
+            'deploy' => 'ieis-ro',
             'supervisor' => $supervisor
         ];
 
