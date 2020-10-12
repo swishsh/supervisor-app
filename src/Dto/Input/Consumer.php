@@ -163,7 +163,7 @@ class Consumer
      */
     public function setAutostart(int $autostart)
     {
-        $this->autostart = $this->autostart + $autostart;
+        $this->autostart = $autostart;
         return $this;
     }
 

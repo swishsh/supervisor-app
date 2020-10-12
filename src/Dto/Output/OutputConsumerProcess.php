@@ -78,7 +78,7 @@ class OutputConsumerProcess
      */
     public function setAutostart(int $autostart)
     {
-        $this->autostart = $this->autostart + $autostart;
+        $this->autostart = $autostart;
         return $this;
     }
 
@@ -135,6 +135,8 @@ class OutputConsumerProcess
         if ($this->stopwaitsecs >= 0) {
             $return['stopwaitsecs'] = $this->stopwaitsecs;
         }
+
+        $return['autostart'] = $this->autostart;
 
         return $return;
     }

@@ -150,7 +150,7 @@ class OutputConsumer
         $outputConsumerProcess->setWorkerName($worker->getName())
             ->setStopwaitsecs($consumer->getStopwaitsecs())
             ->setStartsecs($consumer->getStartsecs())
-            ->setAutostart(1)
+            ->setAutostart($consumer->getAutostart())
             ->incrementNumProcs();
 
         return $this;

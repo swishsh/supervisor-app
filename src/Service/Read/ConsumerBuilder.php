@@ -43,14 +43,14 @@ class ConsumerBuilder
                 ->setStopwaitsecs(isset($consumerThread['stopwaitsecs']) ? $consumerThread['stopwaitsecs'] : -1);
 
             $sign = 1;
-            if (!isset($consumerThread['autostart'])) {
-                $consumerThread['autostart'] = 1;
-            }
-            if (0 === $consumerThread['autostart']) {
-                $sign = 0;
+            if (!isset($consumerThread['autostart']) || $consumerThread['autostart'] != 0) {
+                $consumer->setAutostart(1);
+                continue;
             }
 
-            $consumer->setAutostart($sign * $consumerThread['numprocs']);
+            if (0 === $consumerThread['autostart']) {
+                $consumer->setAutostart(0);
+            }
         }
     }
 }

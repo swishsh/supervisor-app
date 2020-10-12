@@ -485,6 +485,16 @@ supervisor:
         platforms:
             ro: []
 
+    eis.sap.send_notification_on_green_card_retry:
+        ignore: true
+        platforms:
+            ro: []
+
+    eis.sap.send_notification_on_refund_retry:
+        ignore: true
+        platforms:
+            ro: []
+
     eis.order.auto_dfdl:
         template: ieis
         command: 'rabbitmq:consumer:eis.order.auto_dfdl -w -m 50 ##platform##'
@@ -703,13 +713,6 @@ supervisor:
             ro:
                 - {server: ieis-worker11-ro-prod.emag.network, numprocs: 1, autostart: 1}
 
-    eis.warranty.save:
-        template: ieis
-        command: 'rabbitmq:consumer:eis.warranty.save ##platform## -m 50 -w'
-        platforms:
-            ro:
-                - {server: ieis-worker13-ro-prod.emag.network, numprocs: 1, autostart: 1}
-
     eis.email.history.sync:
         template: ieis
         command: 'rabbitmq:consumer:eis.email.history.sync.##platform## -m 50 -w'
@@ -732,21 +735,6 @@ supervisor:
             ro:
                 - {server: ieis-worker15-ro-prod.emag.network, numprocs: 1, autostart: 1}
                 - {server: ieis-worker16-ro-prod.emag.network, numprocs: 1, autostart: 1}
-
-    iprice.fd.offer_save.product_save_rpc:
-        template: ieis
-        command: 'rabbitmq:rpc_server:iprice.fd.offer_save.product_save_rpc ##platform##'
-        is_rpc: true
-        platforms:
-            ro:
-                - {server: ieis-worker1-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker2-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker15-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker16-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker17-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker18-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker19-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker20-ro-prod.emag.network, numprocs: 1, autostart: 1}
 
     isvc.extended_warranty.sync:
         template: ieis
@@ -1136,22 +1124,6 @@ supervisor:
                 - {server: ieis-worker19-ro-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 0}
                 - {server: ieis-worker20-ro-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 0}
 
-    eis.ohs.add_return_period:
-        template: ieis
-        command: 'rabbitmq:consumer:eis.ohs.add_return_period ##platform## -m 100 -w'
-        platforms:
-            ro:
-                - {server: ieis-worker2-ro-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
-                - {server: ieis-worker3-ro-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
-
-    eis.awb.save_ohs:
-        template: ieis
-        command: 'rabbitmq:consumer:eis.awb.save_ohs ##platform## -m 100 -w'
-        platforms:
-            ro:
-                - {server: ieis-worker16-ro-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
-                - {server: ieis-worker17-ro-prod.emag.network, numprocs: 1, startsecs: 3, autostart: 1}
-
     eis.order.cancel.bulk:
         template: ieis
         command: 'rabbitmq:consumer:eis.order.cancel.bulk ##platform##'
@@ -1300,22 +1272,6 @@ supervisor:
         platforms:
             ro:
                 - {server: ieis-worker5-ro-prod.emag.network, numprocs: 1, autostart: 1}
-
-    eis.order.add_old:
-        template: ieis
-        command: 'rabbitmq:consumer:eis.order.add_old ##platform## -m 50 -w'
-        ignore: true
-        platforms:
-            ro: []
-
-    eis.delivery.consumer.delivery_planning:
-        template: ieis
-        command: 'rabbitmq:consumer eis.delivery.consumer.delivery_planning.##platform## -m 50 -w'
-        platforms:
-            ro:
-                - {server: ieis-worker14-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker15-ro-prod.emag.network, numprocs: 1, autostart: 1}
-
     eis.delivery.dpl_order_update:
         template: ieis
         command: 'rabbitmq:consumer:eis.delivery.dpl_order_update ##platform## -m 50 -w'
@@ -1422,6 +1378,14 @@ supervisor:
                 - {server: ieis-worker19-ro-prod.emag.network, numprocs: 1, autostart: 1}
                 - {server: ieis-worker20-ro-prod.emag.network, numprocs: 1, autostart: 1}
 
+    eis.invoice.warranty_snapshot.sync:
+        template: ieis
+        command: 'rabbitmq:consumer eis.invoice.warranty_snapshot.sync.##platform## -w'
+        platforms:
+            ro:
+                - {server: ieis-worker19-ro-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: ieis-worker20-ro-prod.emag.network, numprocs: 1, autostart: 1}
+
     trn.eis.send_order_to_dpl:
         template: ieis
         command: 'rabbitmq:consumer trn.eis.send_order_to_dpl.##platform## -m 50 -w'
@@ -1490,28 +1454,6 @@ supervisor:
             ro:
                 - {server: ieis-worker12-ro-prod.emag.network, numprocs: 1, autostart: 1}
 
-    trn.eis.update_showroom_delivery_tracking_to_ohs:
-        template: ieis
-        command: 'rabbitmq:consumer trn.eis.update_showroom_delivery_tracking_to_ohs.##platform## -m 50 -w'
-        platforms:
-            ro:
-                - {server: ieis-worker1-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker2-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker3-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker4-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker5-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker6-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker7-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker8-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker9-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker10-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker11-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker12-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker13-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker14-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker15-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker16-ro-prod.emag.network, numprocs: 1, autostart: 1}
-
     trn.order.transfer_received:
         template: ieis
         command: 'rabbitmq:consumer trn.order.transfer_received.##platform## -m 50 -w'
@@ -1543,14 +1485,33 @@ supervisor:
                 - {server: ieis-worker3-ro-prod.emag.network, numprocs: 1, autostart: 1}
                 - {server: ieis-worker4-ro-prod.emag.network, numprocs: 1, autostart: 1}
 
-    eis.post.reversal.operations:
+    eis.rev.post.reversal.operations_emag:
         template: ieis
-        command: 'rabbitmq:consumer eis.post.reversal.operations.##platform## -m 50 -w'
+        command: 'rabbitmq:consumer eis.rev.post.reversal.operations_emag.##platform## -m 50 -w'
         platforms:
             ro:
                 - {server: ieis-worker4-ro-prod.emag.network, numprocs: 1, autostart: 1}
                 - {server: ieis-worker5-ro-prod.emag.network, numprocs: 1, autostart: 1}
                 - {server: ieis-worker6-ro-prod.emag.network, numprocs: 1, autostart: 1}
+
+    eis.rev.post.reversal.operations_fd:
+        template: ieis
+        command: 'rabbitmq:consumer eis.rev.post.reversal.operations_fd.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: ieis-worker4-ro-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: ieis-worker5-ro-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: ieis-worker6-ro-prod.emag.network, numprocs: 1, autostart: 1}
+
+    eis.old.post.reversal.operations:
+        template: ieis
+        command: 'rabbitmq:consumer eis.old.post.reversal.operations.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: ieis-worker4-ro-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: ieis-worker5-ro-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: ieis-worker6-ro-prod.emag.network, numprocs: 1, autostart: 1}
+
     eis.move.delivery:
         template: ieis
         command: 'rabbitmq:consumer eis.move.delivery.##platform## -m 50 -w'
@@ -1560,13 +1521,6 @@ supervisor:
                 - {server: ieis-worker17-ro-prod.emag.network, numprocs: 1, autostart: 1}
                 - {server: ieis-worker18-ro-prod.emag.network, numprocs: 1, autostart: 1}
                 - {server: ieis-worker19-ro-prod.emag.network, numprocs: 1, autostart: 1}
-                - {server: ieis-worker20-ro-prod.emag.network, numprocs: 1, autostart: 1}
-    eos.refund.status:
-        template: ieis
-        command: 'rabbitmq:consumer eos.refund.status.##platform## -m 50 -w'
-        platforms:
-            ro:
-                - {server: ieis-worker1-ro-prod.emag.network, numprocs: 1, autostart: 1}
                 - {server: ieis-worker20-ro-prod.emag.network, numprocs: 1, autostart: 1}
 
     eis.order.resend_payment_link:
@@ -1592,3 +1546,86 @@ supervisor:
                 - {server: ieis-worker9-ro-prod.emag.network, numprocs: 1, autostart: 0}
                 - {server: ieis-worker10-ro-prod.emag.network, numprocs: 1, autostart: 0}
                 - {server: ieis-worker11-ro-prod.emag.network, numprocs: 1, autostart: 0}
+
+    eos.refund.message.processor:
+        template: ieis
+        command: 'rabbitmq:consumer eos.refund.message.processor.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: ieis-worker8-ro-prod.emag.network, numprocs: 1}
+                - {server: ieis-worker9-ro-prod.emag.network, numprocs: 1}
+
+    rcl.refund.message.processor:
+        template: ieis
+        command: 'rabbitmq:consumer rcl.refund.message.processor.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: ieis-worker10-ro-prod.emag.network, numprocs: 1}
+                - {server: ieis-worker11-ro-prod.emag.network, numprocs: 1}
+
+    eis.refund.processor:
+        template: ieis
+        command: 'rabbitmq:consumer eis.refund.processor.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: ieis-worker8-ro-prod.emag.network, numprocs: 1}
+                - {server: ieis-worker9-ro-prod.emag.network, numprocs: 1}
+
+    eis.sap.send_notification_on_green_card:
+        template: ieis
+        command: 'rabbitmq:consumer eis.sap.send_notification_on_green_card.##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: ieis-worker8-ro-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: ieis-worker9-ro-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    eis.ecredit.request:
+        template: ieis
+        command: 'rabbitmq:consumer eis.ecredit.request.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: ieis-worker1-ro-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: ieis-worker2-ro-prod.emag.network, numprocs: 1, autostart: 1}
+
+    eis.sap.send_notification_on_refund:
+        template: ieis
+        command: 'rabbitmq:consumer eis.sap.send_notification_on_refund.##platform## -m 100 -w'
+        platforms:
+            ro:
+                - {server: ieis-worker8-ro-prod.emag.network, numprocs: 1, startsecs: 3}
+                - {server: ieis-worker9-ro-prod.emag.network, numprocs: 1, startsecs: 3}
+
+    eis.genius_retry_update_account.dummy:
+        ignore: true
+        platforms:
+            ro: []
+
+    eis.genius_retry_update_account.retry:
+        template: ieis
+        command: 'rabbitmq:consumer eis.genius_retry_update_account.retry.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: ieis-worker14-ro-prod.emag.network, numprocs: 1, autostart: 1}
+
+    eis.srn_storage_sync:
+        template: ieis
+        command: 'rabbitmq:consumer eis.srn_storage_sync.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: ieis-worker14-ro-prod.emag.network, numprocs: 1, autostart: 1}
+
+    eis.crn.cancel_order_add_refund_retry:
+        template: ieis
+        command: 'rabbitmq:consumer eis.crn.cancel_order_add_refund_retry.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: ieis-worker8-ro-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: ieis-worker9-ro-prod.emag.network, numprocs: 1, autostart: 1}
+
+    eis.crn.refund_status:
+        template: ieis
+        command: 'rabbitmq:consumer eis.crn.refund_status.##platform## -m 50 -w'
+        platforms:
+            ro:
+                - {server: ieis-worker8-ro-prod.emag.network, numprocs: 1, autostart: 1}
+                - {server: ieis-worker9-ro-prod.emag.network, numprocs: 1, autostart: 1}
