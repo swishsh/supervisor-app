@@ -190,8 +190,14 @@ class OutputConsumer
             $response['ignore'] = $this->isIgnore();
         }
 
-        $response['template'] = $this->getTemplate();
-        $response['command'] = $this->getCommand();
+        if (null !== $this->getTemplate()) {
+            $response['template'] = $this->getTemplate();
+        }
+
+        if (null !== $this->getCommand()) {
+            $response['command'] = $this->getCommand();
+        }
+
         $response['platforms'] = [$this->getPlatform() => $processCollection];
 
         return $response;
